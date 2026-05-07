@@ -1,5 +1,4 @@
 -- 1. Creating database & tables
-SOURCE create_table.sql;
 
 CREATE DATABASE hospital_project;
 
@@ -28,7 +27,6 @@ CREATE TABLE hospital_readmission (
 
 
 -- 2. Cleaning column: admission date
-SOURCE cleaning_admission_date.sql;
 
 -- adding column admission_date_clean
 ALTER TABLE hospital_readmission
@@ -67,7 +65,6 @@ WHERE admission_date_clean IS NULL;
 
 
 -- 3. Cleaning column: season
-SOURCE cleaning_season.sql;
 
 -- adding column 'season_clean'
 ALTER TABLE hospital_readmission
@@ -97,7 +94,6 @@ WHERE season IS NULL;
 
 
 -- 4. Cleaning column: age
-SOURCE cleaning_age.sql;
 
 -- adding column 'age_clean'
 ALTER TABLE hospital_readmission
@@ -125,7 +121,6 @@ WHERE age_clean IS NULL;
 
 
 -- 5. Cleaning column: gender
-SOURCE cleaning_gender.sql;
 
 -- adding column gender_clean
 ALTER TABLE hospital_readmission
@@ -154,7 +149,6 @@ WHERE gender_clean IS NULL;
 
 
 -- 6. Cleaning column: region
-SOURCE cleaning_region.sql;
 
 -- adding column region_clean
 ALTER TABLE hospital_readmission
@@ -184,7 +178,6 @@ WHERE region_clean IS NULL;
 
 
 -- 7. Cleaning column: primary_diagnosis
-SOURCE cleaning_primary_diagnosis.sql;
 
 -- adding column primary_diagnosis_clean
 ALTER TABLE hospital_readmission
@@ -227,7 +220,6 @@ WHERE primary_diagnosis_clean IS NULL;
 
 
 -- 8. Cleaning column: comorbidities_count
-SOURCE cleaning_comorbidities_count.sql;
 
 -- adding column 'comorbidities_count_clean'
 ALTER TABLE hospital_readmission
@@ -250,7 +242,6 @@ WHERE comorbidities_count_clean IS NULL;
 
 
 -- 9. Cleaning column: treatment_type
-SOURCE cleaning_treatment_type.sql;
 
 -- adding column treatment_type_clean
 ALTER TABLE hospital_readmission
@@ -280,7 +271,6 @@ WHERE treatment_type_clean IS NULL;
 
 
 -- 10. Cleaning column: medications_count
-SOURCE cleaning_medications_count.sql;
 
 -- adding column 'medications_count_clean'
 ALTER TABLE hospital_readmission
@@ -302,8 +292,7 @@ WHERE medications_count_clean IS NULL;
 
 
 
--- 11. Cleaning column: medications_count
-SOURCE cleaning_medications_count.sql;
+-- 11. Cleaning column: followup_visits
 
 -- adding column followup_visits_clean
 ALTER TABLE hospital_readmission
@@ -326,7 +315,6 @@ WHERE followup_visits_clean IS NULL;
 
 
 -- 12. Cleaning column: followup_visits
-SOURCE cleaning_followup_visits.sql;
 
 -- adding column followup_visits_clean
 ALTER TABLE hospital_readmission
@@ -349,7 +337,6 @@ WHERE followup_visits_clean IS NULL;
 
 
 -- 13. Cleaning column: prev_readmission
-SOURCE cleaning_prev_readmission.sql;
 
 -- adding column prev_readmission_clean
 ALTER TABLE hospital_readmission
@@ -372,7 +359,6 @@ WHERE prev_readmission_clean IS NULL;
 
 
 -- 14. Cleaning column: prev_readmission
-SOURCE cleaning_prev_readmission.sql;
 
 -- adding column insurance_type_clean
 ALTER TABLE hospital_readmission
@@ -408,7 +394,6 @@ WHERE insurance_type_clean IS NULL;
 
 
 -- 15. Cleaning column: discharge_disposition
-SOURCE cleaning_discharge_dispositionn.sql;
 
 -- adding column discharge_disposition_clean
 ALTER TABLE hospital_readmission
@@ -443,7 +428,6 @@ WHERE discharge_disposition_clean IS NULL;
 
 
 -- 16. Cleaning column: readmission_risk_score
-SOURCE cleaning_readmission_risk_score.sql;
 
 -- adding column readmission_risk_score_clean
 ALTER TABLE hospital_readmission
@@ -480,7 +464,6 @@ WHERE readmission_risk_score_clean IS NULL;
 
 
 -- 17. Cleaning column: label
-SOURCE cleaning_label.sql;
 
 -- adding column label_clean
 ALTER TABLE hospital_readmission
