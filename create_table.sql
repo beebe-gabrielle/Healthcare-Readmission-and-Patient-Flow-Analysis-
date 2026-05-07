@@ -36,23 +36,23 @@ ADD COLUMN admission_date_clean VARCHAR(20);
 
 -- formatting data
 UPDATE hospital_readmission
-SET admission_date_clean = CASE 
-
-    -- format MM/DD/YYYY (e.g., 08/24/2022)
-    WHEN admission_date REGEXP '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$' 
+SET admission_date_clean = 
+	CASE 
+  		-- format MM/DD/YYYY (e.g., 08/24/2022)
+    	WHEN admission_date REGEXP '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$' 
         THEN DATE_FORMAT(STR_TO_DATE(admission_date, '%m/%d/%Y'), '%Y-%m-%d')
     
-    -- format D-Mon-YY (e.g., 13-sep-21)
-    WHEN admission_date REGEXP '^[0-9]{1,2}-[A-Za-z]+-[0-9]{2}$' 
+    	-- format D-Mon-YY (e.g., 13-sep-21)
+   		WHEN admission_date REGEXP '^[0-9]{1,2}-[A-Za-z]+-[0-9]{2}$' 
         THEN DATE_FORMAT(STR_TO_DATE(admission_date, '%e-%b-%y'), '%Y-%m-%d')
-    
-    -- format M/D/YYYY H:MM (e.g., 3/23/2021 0:00)
-    WHEN admission_date REGEXP '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4} [0-9]{1,2}:[0-9]{2}$' 
+	
+    	-- format M/D/YYYY H:MM (e.g., 3/23/2021 0:00)
+    	WHEN admission_date REGEXP '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4} [0-9]{1,2}:[0-9]{2}$' 
         THEN DATE_FORMAT(STR_TO_DATE(admission_date, '%c/%e/%Y %H:%i'), '%Y-%m-%d')
 
-    -- fallback for nulls 
-    ELSE NULL 
-END;
+    	-- fallback for nulls 
+    	ELSE NULL 
+	END;
 
 -- viewing unique values
 SELECT DISTINCT admission_date_clean
@@ -75,14 +75,14 @@ ADD COLUMN season_clean VARCHAR(20);
 
 -- formatting data
 UPDATE hospital_readmission
-SET season_clean = CASE
-
-    -- handling nulls and blank strings
-	WHEN season IS NULL OR TRIM(season) = '' THEN 'Unkown'
-    
-    -- formatting remaining values
-    ELSE CONCAT(UPPER(LEFT(TRIM(season), 1)), LOWER(SUBSTRING(TRIM(season), 2)))
-END;
+SET season_clean = 
+	CASE
+    	-- handling nulls and blank strings
+		WHEN season IS NULL OR TRIM(season) = '' THEN 'Unknown'
+	
+   		-- formatting remaining values
+    	ELSE CONCAT(UPPER(LEFT(TRIM(season), 1)), LOWER(SUBSTRING(TRIM(season), 2)))
+	END;
 
 -- viewing unique values
 SELECT DISTINCT season_clean
@@ -92,7 +92,7 @@ ORDER BY season_clean;
 -- viewing null values
 SELECT COUNT(*) AS null_count
 FROM hospital_readmission
-WHERE season IS NULL OR season = '';
+WHERE season IS NULL;
 
 
 
@@ -105,12 +105,12 @@ ADD COLUMN age_clean INT;
 
 --formatting data
 UPDATE hospital_readmission
-SET age_clean = CASE 
-	
-    -- removing outliers
-    WHEN age > 120 OR age < 0 THEN NULL
-    ELSE age
-END;
+SET age_clean = 
+	CASE 
+    	-- removing outliers
+    	WHEN age > 120 OR age < 0 THEN NULL
+    	ELSE age
+	END;
 
 -- viewing unique values
 SELECT DISTINCT age_clean
@@ -133,13 +133,14 @@ ADD COLUMN gender_clean VARCHAR(20);
 
 -- formatting data
 UPDATE hospital_readmission
-SET gender_clean = CASE
-	WHEN LOWER(TRIM(gender)) IN ('M','m','male','MALE') THEN 'Male'
-    WHEN LOWER(TRIM(gender)) IN ('F','f','female','FEMALE') THEN 'Female'
+SET gender_clean = 
+	CASE
+		WHEN LOWER(TRIM(gender)) IN ('M','m','male','MALE') THEN 'Male'
+   		WHEN LOWER(TRIM(gender)) IN ('F','f','female','FEMALE') THEN 'Female'
     
-    -- handling nulls
-    ELSE 'Unknown'
-END;
+  		  -- handling nulls
+   		ELSE 'Unknown'
+	END;
   
 -- viewing unique values
 SELECT DISTINCT gender_clean
@@ -161,10 +162,10 @@ ADD COLUMN region_clean VARCHAR(20);
 
 -- formatting data
 UPDATE hospital_readmission
-SET region_clean = CASE
-
+SET region_clean = 
+	CASE
 	-- handling nulls and blank strings
-	WHEN region IS NULL OR TRIM(region) = '' THEN 'Unkown'
+	WHEN region IS NULL OR TRIM(region) = '' THEN 'Unknown'
     
     -- formatting remaining values
     ELSE CONCAT(UPPER(LEFT(TRIM(region), 1)), LOWER(SUBSTRING(TRIM(region), 2)))
@@ -245,3 +246,194 @@ ORDER BY comorbidities_count_clean;
 SELECT COUNT(*) AS null_count
 FROM hospital_readmission
 WHERE comorbidities_count_clean IS NULL;
+
+
+
+-- 8. Cleaning column: treatment_type
+SOURCE cleaning_treatment_type.sql;
+
+-- adding column treatment_type_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN treatment_type_clean VARCHAR(20);
+
+-- formatting data
+UPDATE hospital_readmission
+SET treatment_type_clean = 
+	CASE 
+		-- handling nulls and blank strings
+		WHEN treatment_type IS NULL OR TRIM(treatment_type) = '' THEN 'Unknown'
+    
+		-- formatting remaining values
+		ELSE CONCAT(UPPER(LEFT(TRIM(treatment_type), 1)), LOWER(SUBSTRING(TRIM(treatment_type), 2)))
+	END;
+
+-- viewing distinct values
+SELECT DISTINCT treatment_type_clean
+FROM hospital_readmission
+ORDER BY treatment_type_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE treatment_type_clean IS NULL;
+
+
+
+-- 9. Cleaning column: medications_count
+SOURCE cleaning_medications_count.sql;
+
+-- adding column 'medications_count_clean'
+ALTER TABLE hospital_readmission
+ADD COLUMN medications_count_clean INT;
+
+-- setting data equal to medications_count
+UPDATE hospital_readmission
+SET medications_count_clean = medications_count;
+
+-- viewing distinct values
+SELECT DISTINCT medications_count_clean
+FROM hospital_readmission
+ORDER BY medications_count_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE medications_count_clean IS NULL;
+
+
+
+-- 10. Cleaning column: medications_count
+SOURCE cleaning_medications_count.sql;
+
+-- adding column followup_visits_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN followup_visits_clean INT;
+
+-- setting data equal to followup_visits
+UPDATE hospital_readmission
+SET followup_visits_clean = followup_visits;
+
+-- viewing distinct values
+SELECT DISTINCT followup_visits_clean
+FROM hospital_readmission
+ORDER BY followup_visits_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE followup_visits_clean IS NULL;
+
+
+
+-- 11. Cleaning column: followup_visits
+SOURCE cleaning_followup_visits.sql;
+
+-- adding column followup_visits_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN followup_visits_clean INT;
+
+-- setting data equal to followup_visits
+UPDATE hospital_readmission
+SET followup_visits_clean = followup_visits;
+
+-- viewing distinct values
+SELECT DISTINCT followup_visits_clean
+FROM hospital_readmission
+ORDER BY followup_visits_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE followup_visits_clean IS NULL;
+
+
+
+-- 12. Cleaning column: prev_readmission
+SOURCE cleaning_prev_readmission.sql;
+
+-- adding column prev_readmission_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN prev_readmission_clean INT;
+
+-- setting data equal to prev_readmission
+UPDATE hospital_readmission
+SET prev_readmission_clean = prev_readmissions;
+
+-- viewing distinct values
+SELECT DISTINCT prev_readmission_clean
+FROM hospital_readmission
+ORDER BY prev_readmission_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE prev_readmission_clean IS NULL;
+
+-- 12. Cleaning column: prev_readmission
+SOURCE cleaning_prev_readmission.sql;
+
+-- adding column insurance_type_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN insurance_type_clean VARCHAR(20);
+
+-- formatting data
+UPDATE hospital_readmission
+SET insurance_type_clean = 
+    CASE 
+        -- handling nulls and blank strings
+        WHEN insurance_type IS NULL OR TRIM(insurance_type) = '' THEN 'Unknown'
+        
+        -- standardizing insurance types
+        WHEN LOWER(TRIM(insurance_type)) IN ('Mcaid', 'Med.') THEN 'Medicaid'
+        WHEN LOWER(TRIM(insurance_type)) = 'Pvt.' THEN 'Private'
+		WHEN LOWER(TRIM(insurance_type)) = 'uninsured' THEN 'Uninsured'
+		WHEN LOWER(TRIM(insurance_type)) = 'MEDICARE' THEN 'Medicare'
+        
+        -- formatting remaining values
+	    ELSE CONCAT(UPPER(LEFT(TRIM(insurance_type), 1)), LOWER(SUBSTRING(TRIM(insurance_type), 2)))
+    END;
+
+-- viewing distinct values
+SELECT DISTINCT insurance_type_clean
+FROM hospital_readmission
+ORDER BY insurance_type_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE insurance_type_clean IS NULL;
+
+
+
+-- 13. Cleaning column: discharge_disposition
+SOURCE cleaning_discharge_dispositionn.sql;
+
+-- adding column discharge_disposition_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN discharge_disposition_clean VARCHAR(50);
+
+-- setting data equal to discharge_disposition and formatting  
+UPDATE hospital_readmission
+SET discharge_disposition_clean = 
+    CASE 
+        -- handling nulls and blank strings
+        WHEN discharge_disposition IS NULL OR TRIM(discharge_disposition) = '' THEN 'Unknown'
+        
+        -- standardizing discharge types
+        WHEN LOWER(TRIM(discharge_disposition)) = ('Rehab') THEN 'Rehabilitation'
+		WHEN LOWER(TRIM(discharge_disposition)) = ('Home health') THEN 'Home Health'
+        WHEN LOWER(TRIM(discharge_disposition)) IN ('skilled nursing', 'SNF') THEN 'Skilled Nursing Facility'
+        
+        -- standardizing remaining values 
+	    ELSE CONCAT(UPPER(LEFT(TRIM(discharge_disposition), 1)), LOWER(SUBSTRING(TRIM(discharge_disposition), 2)))
+    END;
+
+-- viewing distinct values
+SELECT DISTINCT discharge_disposition_clean
+FROM hospital_readmission
+ORDER BY discharge_disposition_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE discharge_disposition_clean IS NULL;
