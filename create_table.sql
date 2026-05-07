@@ -1,3 +1,6 @@
+-- 1. Creating database & tables
+SOURCE create_table.sql;
+
 CREATE DATABASE hospital_project;
 
 USE hospital_project;
@@ -22,6 +25,76 @@ CREATE TABLE hospital_readmission (
     label VARCHAR(10)
 );
 
-SELECT * 
+
+
+-- 2. Cleaning column: admission date
+SOURCE cleaning_admission_date.sql
+
+-- adding column admission_date_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN admission_date_clean VARCHAR(20);
+
+-- formatting data
+UPDATE hospital_readmission
+SET admission_date_clean = CASE 
+
+    -- format MM/DD/YYYY (e.g., 08/24/2022)
+    WHEN admission_date REGEXP '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$' 
+        THEN DATE_FORMAT(STR_TO_DATE(admission_date, '%m/%d/%Y'), '%Y-%m-%d')
+    
+    -- format D-Mon-YY (e.g., 13-sep-21)
+    WHEN admission_date REGEXP '^[0-9]{1,2}-[A-Za-z]+-[0-9]{2}$' 
+        THEN DATE_FORMAT(STR_TO_DATE(admission_date, '%e-%b-%y'), '%Y-%m-%d')
+    
+    -- format M/D/YYYY H:MM (e.g., 3/23/2021 0:00)
+    WHEN admission_date REGEXP '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4} [0-9]{1,2}:[0-9]{2}$' 
+        THEN DATE_FORMAT(STR_TO_DATE(admission_date, '%c/%e/%Y %H:%i'), '%Y-%m-%d')
+
+    -- fallback for nulls 
+    ELSE NULL 
+END;
+
+-- verifying unique values 
+SELECT DISTINCT admission_date_clean
 FROM hospital_readmission
-LIMIT 5;
+ORDER BY admission_date_clean;
+
+-- checking for nulls 
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE admission_date_clean IS NULL;
+
+
+
+-- 3. Cleaning column: season
+SOURCE cleaning_season.sql
+
+-- adding column 'season_clean'
+ALTER TABLE hospital_readmission
+ADD COLUMN season_clean VARCHAR(20);
+
+UPDATE hospital_readmission
+SET season_clean = CASE
+
+    -- handling nulls and blank strings
+	WHEN season IS NULL OR TRIM(season) = '' THEN 'Unkown'
+    
+    -- formatting remaining values
+    ELSE CONCAT(UPPER(LEFT(TRIM(season), 1)), LOWER(SUBSTRING(TRIM(season), 2)))
+END;
+
+-- viewing distinct values
+SELECT DISTINCT season_clean
+FROM hospital_readmission
+ORDER BY season_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE season IS NULL OR season = '';
+
+
+
+
+
+
