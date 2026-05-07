@@ -54,12 +54,12 @@ SET admission_date_clean = CASE
     ELSE NULL 
 END;
 
--- verifying unique values 
+-- viewing unique values
 SELECT DISTINCT admission_date_clean
 FROM hospital_readmission
 ORDER BY admission_date_clean;
 
--- checking for nulls 
+-- viewing null values
 SELECT COUNT(*) AS null_count
 FROM hospital_readmission
 WHERE admission_date_clean IS NULL;
@@ -84,7 +84,7 @@ SET season_clean = CASE
     ELSE CONCAT(UPPER(LEFT(TRIM(season), 1)), LOWER(SUBSTRING(TRIM(season), 2)))
 END;
 
--- viewing distinct values
+-- viewing unique values
 SELECT DISTINCT season_clean
 FROM hospital_readmission
 ORDER BY season_clean;
@@ -112,7 +112,7 @@ SET age_clean = CASE
     ELSE age
 END;
 
--- viewing distinct values
+-- viewing unique values
 SELECT DISTINCT age_clean
 FROM hospital_readmission
 ORDER BY age_clean;
@@ -141,11 +141,11 @@ SET gender_clean = CASE
     ELSE 'Unknown'
 END;
   
--- verifying unique values
+-- viewing unique values
 SELECT DISTINCT gender_clean
 FROM hospital_readmission;
   
--- checking for nulls 
+-- viewing null values 
 SELECT COUNT(*) AS null_count
 FROM hospital_readmission
 WHERE gender_clean IS NULL;
@@ -170,12 +170,12 @@ SET region_clean = CASE
     ELSE CONCAT(UPPER(LEFT(TRIM(region), 1)), LOWER(SUBSTRING(TRIM(region), 2)))
     END;
 
--- verifying formatting
+-- viewing unique values
 SELECT DISTINCT region_clean
 FROM hospital_readmission
 ORDER BY region_clean;
 
--- checking for nulls 
+-- viewing null values 
 SELECT COUNT(*) AS null_count
 FROM hospital_readmission
 WHERE region_clean IS NULL;
@@ -213,15 +213,35 @@ SET primary_diagnosis_clean =
         ELSE CONCAT(UPPER(LEFT(TRIM(primary_diagnosis), 1)), LOWER(SUBSTRING(TRIM(primary_diagnosis), 2)))
     END;
 
--- verifying formatting
+-- viewing unique values
 SELECT DISTINCT primary_diagnosis_clean
 FROM hospital_readmission
 ORDER BY primary_diagnosis_clean;
 
--- checking for nulls 
+-- viewing null values 
 SELECT COUNT(*) AS null_count
 FROM hospital_readmission
 WHERE primary_diagnosis_clean IS NULL;
 
 
 
+-- 8. Cleaning column: comorbidities_count
+SOURCE cleaning_comorbidities_count.sql;
+
+-- adding column 'comorbidities_count_clean'
+ALTER TABLE hospital_readmission
+ADD COLUMN comorbidities_count_clean INT;
+
+-- setting data equal to comorbidities_count
+UPDATE hospital_readmission
+SET comorbidities_count_clean = comorbidities_count;
+
+-- viewing unique values
+SELECT DISTINCT comorbidities_count_clean
+FROM hospital_readmission
+ORDER BY comorbidities_count_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE comorbidities_count_clean IS NULL;
