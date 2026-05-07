@@ -73,6 +73,7 @@ SOURCE cleaning_season.sql
 ALTER TABLE hospital_readmission
 ADD COLUMN season_clean VARCHAR(20);
 
+-- formatting data
 UPDATE hospital_readmission
 SET season_clean = CASE
 
@@ -93,6 +94,90 @@ SELECT COUNT(*) AS null_count
 FROM hospital_readmission
 WHERE season IS NULL OR season = '';
 
+
+-- 3. Cleaning column: age
+SOURCE cleaning_age.sql
+
+-- adding column 'age_clean'
+ALTER TABLE hospital_readmission
+ADD COLUMN age_clean INT;
+
+--formatting data
+UPDATE hospital_readmission
+SET age_clean = CASE 
+	
+    -- removing outliers
+    WHEN age > 120 OR age < 0 THEN NULL
+    ELSE age
+END;
+
+-- viewing distinct values
+SELECT DISTINCT age_clean
+FROM hospital_readmission
+ORDER BY age_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE age_clean IS NULL;
+
+
+
+-- 4. Cleaning column: gender
+SOURCE cleaning_gender.sql;
+
+-- adding column gender_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN gender_clean VARCHAR(20);
+
+-- formatting data
+UPDATE hospital_readmission
+SET gender_clean = CASE
+	WHEN LOWER(TRIM(gender)) IN ('M','m','male','MALE') THEN 'Male'
+    WHEN LOWER(TRIM(gender)) IN ('F','f','female','FEMALE') THEN 'Female'
+    
+    -- handling nulls
+    ELSE 'Unknown'
+END;
+  
+-- verifying unique values
+SELECT DISTINCT gender_clean
+FROM hospital_readmission;
+  
+-- checking for nulls 
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE gender_clean IS NULL;
+
+
+
+-- 5. Cleaning column: region
+SOURCE cleaning_region.sql;
+
+-- adding column region_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN region_clean VARCHAR(20);
+
+-- formatting data
+UPDATE hospital_readmission
+SET region_clean = CASE
+
+	-- handling nulls and blank strings
+	WHEN region IS NULL OR TRIM(region) = '' THEN 'Unkown'
+    
+    -- formatting remaining values
+    ELSE CONCAT(UPPER(LEFT(TRIM(region), 1)), LOWER(SUBSTRING(TRIM(region), 2)))
+    END;
+
+-- verifying formatting
+SELECT DISTINCT region_clean
+FROM hospital_readmission
+ORDER BY region_clean;
+
+-- checking for nulls 
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE region_clean IS NULL;
 
 
 
