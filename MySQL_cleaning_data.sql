@@ -48,7 +48,7 @@ SET admission_date_clean =
     	WHEN admission_date REGEXP '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4} [0-9]{1,2}:[0-9]{2}$' 
         THEN DATE_FORMAT(STR_TO_DATE(admission_date, '%c/%e/%Y %H:%i'), '%Y-%m-%d')
 
-    	-- fallback for nulls 
+    	-- handling nulls
     	ELSE NULL 
 	END;
 
