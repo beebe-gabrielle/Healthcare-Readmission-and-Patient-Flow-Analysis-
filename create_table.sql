@@ -437,3 +437,73 @@ ORDER BY discharge_disposition_clean;
 SELECT COUNT(*) AS null_count
 FROM hospital_readmission
 WHERE discharge_disposition_clean IS NULL;
+
+
+
+-- 14. Cleaning column: readmission_risk_score
+SOURCE cleaning_readmission_risk_score.sql;
+
+-- adding column readmission_risk_score_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN readmission_risk_score_clean VARCHAR(20);
+
+-- formatting data
+UPDATE hospital_readmission
+SET readmission_risk_score_clean = 
+	CASE
+		-- removing % sign and converting to decimal
+		WHEN readmission_risk_score LIKE '%\%%' THEN CAST(REPLACE(readmission_risk_score, '%', '') AS DECIMAL(4,2)) / 100.0
+		
+        -- handling null and missing values 
+        WHEN readmission_risk_score IS NULL OR TRIM(readmission_risk_score) = '' THEN NULL
+        
+        -- standardizing remaining values 
+		ELSE CAST(readmission_risk_score AS DECIMAL(4,2))
+	END;
+
+-- changing data type to DECIMAL(4,2) 
+ALTER TABLE hospital_readmission
+MODIFY COLUMN readmission_risk_score_clean DECIMAL(4,2);
+
+-- viewing distinct values
+SELECT DISTINCT readmission_risk_score_clean
+FROM hospital_readmission
+ORDER BY readmission_risk_score_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE readmission_risk_score_clean IS NULL;
+
+
+
+-- 15. Cleaning column: label
+SOURCE cleaning_label.sql;
+
+-- adding column label_clean
+ALTER TABLE hospital_readmission
+ADD COLUMN label_clean TINYINT;
+
+-- formatting string values to 1 (True) or 0 (False)
+UPDATE hospital_readmission
+SET label_clean = 
+	CASE 
+        -- foramtting True values
+		WHEN LOWER(TRIM(label)) IN ('true', 'yes', '1', 'y', 't') THEN 1
+        
+        -- formatiing False values 
+        WHEN LOWER(TRIM(label)) IN ('false', 'no', '0', 'n', 'f') THEN 0
+        
+        -- handling missing values
+        ELSE NULL
+	END;
+    
+-- viewing distinct values
+SELECT DISTINCT label_clean
+FROM hospital_readmission
+ORDER BY label_clean;
+
+-- viewing null values
+SELECT COUNT(*) AS null_count
+FROM hospital_readmission
+WHERE label_clean IS NULL;
