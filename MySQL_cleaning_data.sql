@@ -99,7 +99,7 @@ WHERE season IS NULL;
 ALTER TABLE hospital_readmission
 ADD COLUMN age_clean INT;
 
---formatting data
+-- formatting data
 UPDATE hospital_readmission
 SET age_clean = 
 	CASE 
@@ -314,29 +314,7 @@ WHERE followup_visits_clean IS NULL;
 
 
 
--- 12. Cleaning column: followup_visits
-
--- adding column followup_visits_clean
-ALTER TABLE hospital_readmission
-ADD COLUMN followup_visits_clean INT;
-
--- setting data equal to followup_visits
-UPDATE hospital_readmission
-SET followup_visits_clean = followup_visits;
-
--- viewing distinct values
-SELECT DISTINCT followup_visits_clean
-FROM hospital_readmission
-ORDER BY followup_visits_clean;
-
--- viewing null values
-SELECT COUNT(*) AS null_count
-FROM hospital_readmission
-WHERE followup_visits_clean IS NULL;
-
-
-
--- 13. Cleaning column: prev_readmission
+-- 12. Cleaning column: prev_readmission
 
 -- adding column prev_readmission_clean
 ALTER TABLE hospital_readmission
@@ -358,7 +336,7 @@ WHERE prev_readmission_clean IS NULL;
 
 
 
--- 14. Cleaning column: prev_readmission
+-- 13. Cleaning column: prev_readmission
 
 -- adding column insurance_type_clean
 ALTER TABLE hospital_readmission
@@ -372,10 +350,10 @@ SET insurance_type_clean =
         WHEN insurance_type IS NULL OR TRIM(insurance_type) = '' THEN 'Unknown'
         
         -- standardizing insurance types
-        WHEN LOWER(TRIM(insurance_type)) IN ('Mcaid', 'Med.') THEN 'Medicaid'
-        WHEN LOWER(TRIM(insurance_type)) = 'Pvt.' THEN 'Private'
+        WHEN LOWER(TRIM(insurance_type)) IN ('mcaid', 'med.') THEN 'Medicaid'
+        WHEN LOWER(TRIM(insurance_type)) = 'pvt.' THEN 'Private'
 		WHEN LOWER(TRIM(insurance_type)) = 'uninsured' THEN 'Uninsured'
-		WHEN LOWER(TRIM(insurance_type)) = 'MEDICARE' THEN 'Medicare'
+		WHEN LOWER(TRIM(insurance_type)) = 'medicare' THEN 'Medicare'
         
         -- formatting remaining values
 	    ELSE CONCAT(UPPER(LEFT(TRIM(insurance_type), 1)), LOWER(SUBSTRING(TRIM(insurance_type), 2)))
@@ -407,9 +385,9 @@ SET discharge_disposition_clean =
         WHEN discharge_disposition IS NULL OR TRIM(discharge_disposition) = '' THEN 'Unknown'
         
         -- standardizing discharge types
-        WHEN LOWER(TRIM(discharge_disposition)) = ('Rehab') THEN 'Rehabilitation'
-		WHEN LOWER(TRIM(discharge_disposition)) = ('Home health') THEN 'Home Health'
-        WHEN LOWER(TRIM(discharge_disposition)) IN ('skilled nursing', 'SNF') THEN 'Skilled Nursing Facility'
+        WHEN LOWER(TRIM(discharge_disposition)) = 'rehab' THEN 'Rehabilitation'
+		WHEN LOWER(TRIM(discharge_disposition)) = 'home health' THEN 'Home Health'
+        WHEN LOWER(TRIM(discharge_disposition)) IN ('skilled nursing', 'snf') THEN 'Skilled Nursing Facility'
         
         -- standardizing remaining values 
 	    ELSE CONCAT(UPPER(LEFT(TRIM(discharge_disposition), 1)), LOWER(SUBSTRING(TRIM(discharge_disposition), 2)))
