@@ -1,4 +1,5 @@
 -- 1. Creating database & tables
+DROP DATABASE IF EXISTS hospital_project;
 
 CREATE DATABASE hospital_project;
 
@@ -336,7 +337,7 @@ WHERE prev_readmission_clean IS NULL;
 
 
 
--- 13. Cleaning column: prev_readmission
+-- 13. Cleaning column: insurance_type
 
 -- adding column insurance_type_clean
 ALTER TABLE hospital_readmission
@@ -371,7 +372,7 @@ WHERE insurance_type_clean IS NULL;
 
 
 
--- 15. Cleaning column: discharge_disposition
+-- 14. Cleaning column: discharge_disposition
 
 -- adding column discharge_disposition_clean
 ALTER TABLE hospital_readmission
@@ -405,7 +406,7 @@ WHERE discharge_disposition_clean IS NULL;
 
 
 
--- 16. Cleaning column: readmission_risk_score
+-- 15. Cleaning column: readmission_risk_score
 
 -- adding column readmission_risk_score_clean
 ALTER TABLE hospital_readmission
@@ -415,19 +416,19 @@ ADD COLUMN readmission_risk_score_clean VARCHAR(20);
 UPDATE hospital_readmission
 SET readmission_risk_score_clean = 
 	CASE
-		-- removing % sign and converting to decimal
-		WHEN readmission_risk_score LIKE '%\%%' THEN CAST(REPLACE(readmission_risk_score, '%', '') AS DECIMAL(4,2)) / 100.0
-		
         -- handling null and missing values 
         WHEN readmission_risk_score IS NULL OR TRIM(readmission_risk_score) = '' THEN NULL
+	
+		-- removing % sign and converting to decimal
+		WHEN readmission_risk_score LIKE '%\%%' THEN CAST(REPLACE(readmission_risk_score, '%', '') AS DECIMAL(5,2)) / 100.0
         
         -- standardizing remaining values 
-		ELSE CAST(readmission_risk_score AS DECIMAL(4,2))
+		ELSE CAST(readmission_risk_score AS DECIMAL(5,2))
 	END;
 
--- changing data type to DECIMAL(4,2) 
+-- changing data type to DECIMAL(5,2) 
 ALTER TABLE hospital_readmission
-MODIFY COLUMN readmission_risk_score_clean DECIMAL(4,2);
+MODIFY COLUMN readmission_risk_score_clean DECIMAL(5,2);
 
 -- viewing distinct values
 SELECT DISTINCT readmission_risk_score_clean
@@ -441,7 +442,7 @@ WHERE readmission_risk_score_clean IS NULL;
 
 
 
--- 17. Cleaning column: label
+-- 16. Cleaning column: label
 
 -- adding column label_clean
 ALTER TABLE hospital_readmission
@@ -451,10 +452,10 @@ ADD COLUMN label_clean TINYINT;
 UPDATE hospital_readmission
 SET label_clean = 
 	CASE 
-        -- foramtting True values
+        -- formatting true values
 		WHEN LOWER(TRIM(label)) IN ('true', 'yes', '1', 'y', 't') THEN 1
         
-        -- formatiing False values 
+        -- formatting false values 
         WHEN LOWER(TRIM(label)) IN ('false', 'no', '0', 'n', 'f') THEN 0
         
         -- handling missing values
