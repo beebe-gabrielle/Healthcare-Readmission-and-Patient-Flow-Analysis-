@@ -2,7 +2,26 @@
 
 # Healthcare Readmission & Patient Flow Analysis
 
-Tableau Public Dashboard: (**insert link**)
+## Tools Used
+
+## Executive Summary
+
+## Data Overview
+
+## Dashboard 
+
+<img width="906" height="514" alt="image" src="https://github.com/user-attachments/assets/73739947-fd90-4e24-9d2b-356425268afc" />
+
+
+## Key Insights
+
+## Dashboard 
+
+## Key Insights
+
+## Recommendations
+
+## Conclusion 
 
 <img width="515" height="240" alt="image" src="https://github.com/user-attachments/assets/d63f63c6-9b6a-421f-ba36-5d143e9de7af" />
 
@@ -24,9 +43,6 @@ Tableau Public Dashboard: (**insert link**)
 
 <p></p>
 
-## Tools Used
-
-## Overview
 
 ## Objective
 
