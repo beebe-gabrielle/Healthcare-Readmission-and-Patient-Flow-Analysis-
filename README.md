@@ -24,7 +24,7 @@ This analysis translates patient flow and clinical data from 7,000 admissions re
 
 ## Data Overview
 
-## Dashboard 
+## Patient Risk & Demographics Dashboard 
 
 <img width="906" height="514" alt="image" src="https://github.com/user-attachments/assets/73739947-fd90-4e24-9d2b-356425268afc" />
 
