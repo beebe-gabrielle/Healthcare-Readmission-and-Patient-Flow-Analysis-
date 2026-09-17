@@ -4,6 +4,10 @@
 
 ## Tools Used
 
+**SQL (MySQL)** - Data Cleaning, Validation 
+
+**Power BI** - Data Modeling, Visualization, Dashboard 
+
 ## Executive Summary
 
 ## Data Overview
