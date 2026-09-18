@@ -29,7 +29,9 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 **Data Cleaning**
 * Parsing & Transforming: Parsed assorted formats into standardized YYYY-MM-DD dates, stripped percentage signs to cast 'readmission_risk_score' to a DECIMAL(5,2) metric, and mapped mixed boolean representations (True/1/Yes) to a TINYINT binary flag (label_clean).
 
-* Standardization: Cleaned string fields using TRIM() and CONCAT() capitalization logic, mapped clinical abbreviations to standard medical terms, reclassified blank categorial records as 'Unknown' and filtered extreme outlier values in age.
+* Standardization: Cleaned string fields using TRIM() and CONCAT() capitalization logic, mapped clinical abbreviations to standard medical terms, reclassified blank categorial records as 'Unknown' and filtered extreme outlier values in age.\
+
+* Reporting View: Constructed a database view that selected cleaned fields and restored analysis ready column aliases to serve as a seamless data source for Power BI
 
 **Key Data Attributes** 
 * Patient Info & Demographics: patient_id, age, gender, region
@@ -39,6 +41,10 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 * Operational Info & Stay Details: admission_date, season, length_of_stay, followup_visits_clean, discharge_disposition, insurance_type
 
 * Readmission History & Target Flag: prev_readmission, label (30-day Readmission Flag)
+
+**Figure 1: Primary Cleaning Script** 
+
+**Figure 2: Reporting View Definition**
 
 ## Patient Risk & Demographics Dashboard 
 
