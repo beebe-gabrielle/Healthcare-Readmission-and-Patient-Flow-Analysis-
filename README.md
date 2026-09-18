@@ -24,6 +24,22 @@ This analysis translates patient flow and clinical data from 7,000 admissions re
 
 ## Data Overview
 
+To ensure accurate clinical analysis, raw patient records were ingested, cleaned, and transformed in MySQL before being integrated into Power BI. The primary dataset covers inpatient encounters, tracking patient demographics, clinical diagnoses, treatment history, operational metrics, and 30-day readmission status.
+
+**Data Cleaning**
+* Parsing & Transforming: Parsed assorted formats into standardized YYYY-MM-DD dates, stripped percentage signs to cast 'readmission_risk_score' to a DECIMAL(5,2) metric, and mapped mixed boolean representations (True/1/Yes) to a TINYINT binary flag (label_clean).
+
+* Standardization: Cleaned string fields using TRIM() and CONCAT() capitalization logic, mapped clinical abbreviations to standard medical terms, reclassified blank categorial records as 'Unknown' and filtered extreme outlier values in age.
+
+**Key Data Attributes** 
+* Patient Info & Demographics: patient_id, age, gender, region
+
+* Clinical Metrics: primary_diagnosis, comorbidities_count, treatment_type, medications_count, readmission_risk_score
+
+* Operational Info & Stay Details: admission_date, season, length_of_stay, followup_visits_clean, discharge_disposition, insurance_type
+
+* Readmission History & Target Flag: prev_readmission, label (30-day Readmission Flag)
+
 ## Patient Risk & Demographics Dashboard 
 
 <img width="906" height="514" alt="image" src="https://github.com/user-attachments/assets/73739947-fd90-4e24-9d2b-356425268afc" />
