@@ -42,9 +42,15 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 
 * Readmission History & Target Flag: prev_readmission, label (30-day Readmission Flag)
 
-**Figure 1: Primary Cleaning Script** 
+**Figure 1: Primary Cleaning Script Example** 
+
+<img width="682" height="403" alt="image" src="https://github.com/user-attachments/assets/06099250-e6a8-4f20-96de-b55b7dcfaf9c" />
+
 
 **Figure 2: Reporting View Definition**
+
+<img width="613" height="341" alt="image" src="https://github.com/user-attachments/assets/67983629-5181-4832-bca6-236c37a50b6c" />
+
 
 ## Patient Risk & Demographics Dashboard 
 
