@@ -53,13 +53,14 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 
 
 ## Patient Risk & Demographics Dashboard 
-
+*(Note: Dataset is synthetically generated for demonstration; baseline rates reflect simulated distributions rather than actual clinical performance).*
+<p></p>
 <img width="636" height="366" alt="image" src="https://github.com/user-attachments/assets/1c49e7c4-2742-4675-8b9e-91c358a0e7eb" />
 
 
 ## Key Insights
 
-**Overall readmissions are critically high:** A 77.68% overall admission rate indicates widespread post-discharge return rates, accompanied by an average length-of-stay (LOS) of 7.8 days and an average risk score of 78.3%
+**Overall Readmissions:** Across the synthetic dataset, overall readmissions are elevated, showing a 77.68% readmission rate, an average length-of-stay (LOS) of 7.8 days, and an average risk score of 78.3%.
 
 **Readmission risk is concentrated in chronic conditions:** Primary diagnoses such as Sepsis, COPD, Heart Failure, Stroke, and Chronic Kidney Disease lead the hospital in readmission rates, with each condition approaching or exceeding 80-90%.
 
