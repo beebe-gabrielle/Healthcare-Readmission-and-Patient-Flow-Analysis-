@@ -54,7 +54,8 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 
 ## Patient Risk & Demographics Dashboard 
 
-<img width="906" height="514" alt="image" src="https://github.com/user-attachments/assets/73739947-fd90-4e24-9d2b-356425268afc" />
+<img width="636" height="366" alt="image" src="https://github.com/user-attachments/assets/1c49e7c4-2742-4675-8b9e-91c358a0e7eb" />
+
 
 ## Key Insights
 
@@ -71,6 +72,14 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 **Follow-up visits show specific operational intervention windows:** Readmissions are heavily concentrated among patients who complete 2 and 4 follow-up visits, identifying specific post-release touchpoints where care coordination or outpatient monitoring needs reinforcement. 
 
 ## Dashboard 
+
+<img width="585" height="358" alt="image" src="https://github.com/user-attachments/assets/96388c76-2281-4a6b-b4b9-2a26000ffaa9" />
+
+<img width="618" height="378" alt="image" src="https://github.com/user-attachments/assets/afc603aa-95a7-474e-91b7-d100d7455a52" />
+
+<img width="661" height="377" alt="image" src="https://github.com/user-attachments/assets/4b13be77-08ec-403b-9579-4a98958b7053" />
+
+<img width="632" height="206" alt="image" src="https://github.com/user-attachments/assets/d45b8e9c-e656-47cd-ac51-0ff51fba590b" />
 
 ## Key Insights
 
