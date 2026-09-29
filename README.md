@@ -72,15 +72,22 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 
 **Follow-up visits show specific operational intervention windows:** Readmissions are heavily concentrated among patients who complete 2 and 4 follow-up visits, identifying specific post-release touchpoints where care coordination or outpatient monitoring needs reinforcement. 
 
-## Dashboard 
+## Care Coordination & Post-Discharge Operations Dashboard 
+*(Note: Dataset is synthetically generated for demonstration; baseline rates reflect simulated distributions rather than actual clinical performance).*
+<p></p>
+<img width="898" height="504" alt="image" src="https://github.com/user-attachments/assets/8158e29b-6e77-4181-9dc0-33c1aa40cbbe" />
 
-<img width="585" height="358" alt="image" src="https://github.com/user-attachments/assets/96388c76-2281-4a6b-b4b9-2a26000ffaa9" />
+## Key Insights 
 
-<img width="618" height="378" alt="image" src="https://github.com/user-attachments/assets/afc603aa-95a7-474e-91b7-d100d7455a52" />
+**Follow-up volume alone does not prevent readmission:** Wile overall patient follow-up averages 3.65 visits, readmitted patients logged a slightly higher average of 3.90 visits. This indicates that post-discharge contact volume is less critical than the timing, clinical depth, and targeted nature of the care provided. 
 
-<img width="661" height="377" alt="image" src="https://github.com/user-attachments/assets/4b13be77-08ec-403b-9579-4a98958b7053" />
+**High concentration among specific discharge pathways:** Readmission risk scales sharply with stay duration across facility handoffs. Long stay patients discharged to Skilled Nursing Facilities (SNF) demonstrate the highest vulnerability (reaching up to 94% readmission), followed closely by long-stay Home Health discharges (81%).
 
-<img width="632" height="206" alt="image" src="https://github.com/user-attachments/assets/d45b8e9c-e656-47cd-ac51-0ff51fba590b" />
+**Payer disparities highlight systemic vulnerability:** Readmission rates vary substantially by coverage type, with Medicare beneficiaries demonstrating the highest overall rate, followed by Uninsured and Medicaid populations. Private insurance consistently exhibits the lowest relative readmission baseline.
+
+**Compounding risk of medication burden & complexity:** High medication counts significantly elevate readmission rates even in low-comorbidity tiers. Patients with 5+ comorbidities combined with polypharmacy represent the highest operational risk cohort at 93.68%.
+
+**Targeted resource allocation opportunity:** With 57.81% of overall discharges meeting high-risk criteria, care coordination teams can maximize impact by prioritizing outreach based on discharge pathway (SNF/Home Health) and polypharmacy rather than uniform follow-up scheduling.
 
 ## Key Insights
 
