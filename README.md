@@ -89,8 +89,6 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 
 **Targeted resource allocation opportunity:** With 57.81% of overall discharges meeting high-risk criteria, care coordination teams can maximize impact by prioritizing outreach based on discharge pathway (SNF/Home Health) and polypharmacy rather than uniform follow-up scheduling.
 
-## Key Insights
-
 ## Recommendations
 
 ## Conclusion 
