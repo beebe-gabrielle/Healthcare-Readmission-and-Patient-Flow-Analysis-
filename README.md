@@ -55,7 +55,7 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 ## Patient Risk & Demographics Dashboard 
 *(Note: Dataset is synthetically generated for demonstration; baseline rates reflect simulated distributions rather than actual clinical performance).*
 <p></p>
-<img width="636" height="366" alt="image" src="https://github.com/user-attachments/assets/1c49e7c4-2742-4675-8b9e-91c358a0e7eb" />
+<img width="1020" height="666" alt="image" src="https://github.com/user-attachments/assets/d8f54c40-0e13-473d-af9c-29621990aa28" />
 
 
 ## Key Insights
