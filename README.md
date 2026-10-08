@@ -60,11 +60,11 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 <img width="613" height="341" alt="image" src="https://github.com/user-attachments/assets/67983629-5181-4832-bca6-236c37a50b6c" />
 
 
-## Patient Risk & Demographics Dashboard 
+## Healthcare Readmissions & Patient Flow Dashboard  
 *(Important: Dataset is synthetically generated for portfolio demonstration purposes; Readmission rates and other clinical metrics are simulated and should not be interpreted as representative of real-world hospital performance).*
 <p></p>
 
-<img width="1298" height="734" alt="image" src="https://github.com/user-attachments/assets/bc82342c-6723-4b59-a6a5-96ed729fbb1a" />
+<img width="1297" height="737" alt="image" src="https://github.com/user-attachments/assets/8e31495d-95fa-47f7-ae89-55022ec1650f" />
 
 
 ## Key Insights
