@@ -14,19 +14,19 @@
 
 ## Project Overview & Objectives
 
-Health Flow Co. is a fictional healthcare provider seeking to determine where operational improvements and care-coordinated strategies can yield the greatest impact on patient outcomes and hospital bed efficiency. Leadership requires clear visibility into high-risk patient populations, post-discharge transitions, length-of-stay dynamics, and key operational drivers associated with elevated readmission risk. 
+Health Flow Co. is a fictional healthcare system seeking to determine where operational improvements and care-coordinated strategies can yield the greatest impact on patient outcomes and hospital bed efficiency. Leadership requires clear data-driven visibility into high-risk patient populations, post-discharge transitions, length-of-stay (LOS) dynamics, and key operational drivers associated with elevated readmission risk. 
 
-This analysis translates patient flow and clinical data from 7,000 admissions records into actionable insights to address the following core questions posed by managment:
+This project translates ~7000 patient admissions and care records into actionable insights that address the following core business questions posed by management:
 
 * **Which clinical diagnoses and patient age groups account for the highest concentration of readmission risk?**
-
+  
 * **How do patient discharge settings and length of stay (LOS) impact readmission outcomes?**
-
+  
 * **How does readmission risk vary by payer or insurance type, and where are coverage vulnerabilities most pronounced?**
-
+  
 * **At what point post-discharge are readmissions occurring, and what does follow-up cadence tell us about care coordination timing?**
-
-* **Where should discharge planning, follow-up scheduling, and care-coordination resources be prioritized to achieve a sustained reduction in readmissions** 
+  
+* **Where should discharge planning, follow-up scheduling, and care-coordination resources be prioritized to achieve a sustained reduction in readmissions?**
 
 ## Data Overview
 
@@ -61,68 +61,51 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 ## Patient Risk & Demographics Dashboard 
 *(Note: Dataset is synthetically generated for demonstration; baseline rates reflect simulated distributions rather than actual clinical performance).*
 <p></p>
-<img width="1020" height="666" alt="image" src="https://github.com/user-attachments/assets/d8f54c40-0e13-473d-af9c-29621990aa28" />
+
+<img width="1298" height="734" alt="image" src="https://github.com/user-attachments/assets/bc82342c-6723-4b59-a6a5-96ed729fbb1a" />
 
 
 ## Key Insights
 
 **Overall Readmissions:** Across the synthetic dataset, overall readmissions are elevated, showing a 77.68% readmission rate, an average length-of-stay (LOS) of 7.8 days, and an average risk score of 78.3%.
 
-**Readmission risk is concentrated in chronic conditions:** Primary diagnoses such as Sepsis, COPD, Heart Failure, Stroke, and Chronic Kidney Disease lead the hospital in readmission rates, with each condition approaching or exceeding 80-90%.
+**Readmission risk is concentrated in chronic conditions:** Primary diagnoses such as Sepsis (87.83%), COPD (87.75%), Heart Failure (87.28%), Stroke (86.26%), and Chronic Kidney Disease (84.03%) lead the hospital in readmission rates, dropping significantly for acute/manageable conditions like Hypertension (68.88%) and Influenza (68.75%). 
 
-**Post-discharge risk shifts heavily to Home Health and Skilled Nursing Facilities:** The majority of readmitted patients are discharged to Home Health services, followed by Skilled Nursing Facilities (SNF), while direct discharges to Home represent a minimal share of total readmissions. 
+**Readmissions peak among mature adult age groups:** The 61-75 age cohort accounts for the highest volume of readmissions (1,754), with the 46-60 age group following closely behind (1,611), while 0-18 (29) and 19-30 (131) age groups show minimal readmissions.
 
-**Longer hospital stays correlate with higher readmission volume:** Readmission scales directly with stay duration, as Long Stay and Moderate Stay cohorts account for almost all readmissions, whereas Short Stay patients generate low readmissions.
+**Post-acute care handoffs drive maximum risk:** Patients discharged to Skilled Nursing Facilities (SNF) and Home Health experience significantly higher readmission rates across stay durations than those discharged directly home. 
 
-**Readmissions peak among mature adult age groups:** The 61-75 age cohort accounts for the highest volume of readmissions, with the 46-60 age group following closely behind, while 0-18 and 19-30 age groups show minimal readmissions.
+**Length of stay compounds discharge vulnerability:** Across all discharge destinations (Home, Home Health, Rehabilitation, SNF) readmission rates scale sequentially with inpatient stay duration; patients in Moderate and Long Stay categories consistently re-enter the hospital at higher rates than Short stay patients. 
 
 **Follow-up visits show specific operational intervention windows:** Readmissions are heavily concentrated among patients who complete 2 and 4 follow-up visits, identifying specific post-release touchpoints where care coordination or outpatient monitoring needs reinforcement. 
 
-## Care Coordination & Post-Discharge Operations Dashboard 
-*(Note: Dataset is synthetically generated for demonstration; baseline rates reflect simulated distributions rather than actual clinical performance).*
-<p></p>
-<img width="898" height="504" alt="image" src="https://github.com/user-attachments/assets/8158e29b-6e77-4181-9dc0-33c1aa40cbbe" />
-
-## Key Insights 
-
-**Follow-up volume alone does not prevent readmission:** Wile overall patient follow-up averages 3.65 visits, readmitted patients logged a slightly higher average of 3.90 visits. This indicates that post-discharge contact volume is less critical than the timing, clinical depth, and targeted nature of the care provided. 
-
-**High concentration among specific discharge pathways:** Readmission risk scales sharply with stay duration across facility handoffs. Long stay patients discharged to Skilled Nursing Facilities (SNF) demonstrate the highest vulnerability (reaching up to 94% readmission), followed closely by long-stay Home Health discharges (81%).
-
-**Payer disparities highlight systemic vulnerability:** Readmission rates vary substantially by coverage type, with Medicare beneficiaries demonstrating the highest overall rate, followed by Uninsured and Medicaid populations. Private insurance consistently exhibits the lowest relative readmission baseline.
-
-**Compounding risk of medication burden & complexity:** High medication counts significantly elevate readmission rates even in low-comorbidity tiers. Patients with 5+ comorbidities combined with polypharmacy represent the highest operational risk cohort at 93.68%.
-
-**Targeted resource allocation opportunity:** With 57.81% of overall discharges meeting high-risk criteria, care coordination teams can maximize impact by prioritizing outreach based on discharge pathway (SNF/Home Health) and polypharmacy rather than uniform follow-up scheduling.
+**Payer disparities highlight systemic vulnerability:** Readmission rates vary substantially by coverage type, with Medicare beneficiaries demonstrating the highest overall rate (95.45%), followed by Uninsured (78.30%) and Medicaid (77.35%) populations while Private insurance consistently exhibits the lowest relative readmission baseline (66.99%).
 
 ## Recommendations
 
 **1. Diagnosis & Age Cohorts:**
-- Focus extra attention on patients with Chronic conditions like Sepsis, COPD, Heart Failure, Stroke, and Chronic Kidney Disease, as these diagnoses show the highest readmission rates (80-90%)
-- Direct extra support to patients aged 61-75 (the largest group coming back) and 46-60 (the second largest)
-- Use the hospital's computer system to automatically flag patients in these high-risk age and illness groups as soon as they are admitted so the care team can plan ahead.
+- Automate EHR Risk Flagging: Configure EHR triggers at admission to flag patients presenting with Sepsis, COPD, Heart Failure, Stroke, or Chronic Kidney Disease, as these conditions exhibit readmission rates exceeding 80-87%
+- Target Mature Adult Demographics: Concentrate care coordination and social work resources on the 46-60 and 61-75 age cohorts, which represent the vast majority of total readmission volume (1,611 and 1,754 readmissions).
 
-**2. Discharge Disposition & Facility Transitions:**
-- Standardize how patients are handed off to Skilled Nursing Facilities and Home Health services, as these two locations account for most readmissions.
-- Make sure hospital doctors speak directly with staff at nursing homes or home health agencies before releasing a patient to ensure a clear care plan is shared.
-- Reach out or check in on patients within 48-72 hours after they are sent to Home Health or nursing facilities to catch any health issues early.
+**2. Discharge Disposition & Facility Handoffs:**
+- Standardize Inter-Facility Handoffs: Establish mandatory transfer protocols and direct clinical warm handoffs when discharging patients to Skilled Nursing Facilities (SNF) and Home Health, which represent the highest-risk disposition pathways. 
+- Early Post-Release Outreach: Implement mandatory telehealth or care-manager touchpoints within 48-72 hours of discharge for all patients transitioning to SNFs or Home Health care. 
 
 **3. Length-of-Stay (LOS) Dynamics & Extended Stay Risks:**
-- Long hospital stays alone do not stop patients from coming back, long-stay patients sent to nursing facilities (up to 94% readmission rate) and Home Health (81% rate) still face very high risk.
-- Begin planning for a patient's release as soon as they enter the hospital rather than waiting until the end of a long stay.
+- Mitigate Extended-Stay Risk: Initiate discharge planning at admission for patients projected to have Moderate or Long stays, as extended stays in post-acute facilities compound readmissions vulnerability. 
+- Active Bed-Capacity Planning: Coordinate multidisciplinary rounding to streamline care progression, avoiding unnecessary inpatient days that increase patient exposure to hospital-acquired complications. 
 
 **4. Strategic Resources Allocation & Care Coordination:**
-- Having more appointments isn't enough on its own (readmitted patients actually had slightly more visits). Instead, make sure appointments (especially visits 2 and 4) focus on medicine adherence and specific health checks.
-- Instead of giving every patient the same post-hospital support, focus specialized care managers on the 57.81% of patients at high-risk (especially those on Medicare, Medicaid, or uninsured patients)
-- Ensure high-risk patients have a follow-up doctor or telehealth appointments booked within 7 days of leaving the hospital to address problems before they require another hospital stay.
+- Optimize Follow-Up Quality over Quantity: Focus post-discharge touchpoints on high-value clinical interventions (medication reconciliation, symptom checks) during key critical windows, specifically visits 2 and 4, rather than relying solely on total visit count.
+- Target Payer Vulnerabilities: Allocate specialized nurse navigators to Medicare beneficiaries (exhibiting a 95.45% readmission rate), Uninsured (78.30%), and Medicaid (77.35%) populations to address socioeconomic and coverage gaps before release. 
 
-## Conclusion 
+## Conclusion
 
-This project highlights how data analytics can help hospital teams reduce patient readmissions by focusing resources where they are needed most.
+This project demonstrates how data analytics enables healthcare administrators and clinical teams to proactively mitigate hospital readmissions by strategically allocating care management resources to highest-vulnerability cohorts.
 
-The data shows that readmissions are not evenly spread across patients. Instead, they are heavily driven by specific high-risk groups: patients with severe chronic conditions (like Sepsis and Heart Failure), older age groups (ages 46-75), and patients discharged to external facilities like Skilled Nursing Facilities and Home Health. Furthermore, staying in the hospital longer does not guarantee a safe recovery on its own, and simply adding more follow-up visits isn't enough unless those visits focus on critical need like medication management. 
+The analysis reveals that readmission risk is highly concentrated rather than uniformly distributed. Primary drivers include severe chronic conditions (such as Sepsis, COPD, and Heart Failure), mature adult age groups (ages 46–75), and post-acute facility transitions to Skilled Nursing Facilities (SNFs) and Home Health. Furthermore, extended length of stay alone does not eliminate post-discharge vulnerability, and increasing follow-up visit volume is ineffective without targeted clinical depth—specifically during key post-release touchpoints like visits 2 and 4.
 
-By using these insights, the hospital can move away from a "one-size-fits-all" approach. Instead, care teams can focus their time and budget on automated risk flagging, warm handoffs to nursing facilities, and specialized care management for the highes-risk 57% of patients. Taking these targeted steps will help improve patient health outcomes while reducing avoidable hospital reaadmissions. 
+By leveraging these data-driven insights, Health Flow Co. can transition from a passive, "one-size-fits-all" post-discharge model to an automated, precision-driven care strategy. Implementing automated EHR risk triggers, standardized warm handoffs to post-acute facilities, and dedicated nurse navigation for the 57.81% high-risk population will drive sustained reductions in avoidable readmissions while optimizing bed capacity and patient outcomes.
 
 
 
