@@ -64,7 +64,8 @@ To ensure accurate clinical analysis, raw patient records were ingested, cleaned
 *(Important: Dataset is synthetically generated for portfolio demonstration purposes; Readmission rates and other clinical metrics are simulated and should not be interpreted as representative of real-world hospital performance).*
 <p></p>
 
-<img width="1297" height="737" alt="image" src="https://github.com/user-attachments/assets/8e31495d-95fa-47f7-ae89-55022ec1650f" />
+<img width="1297" height="739" alt="image" src="https://github.com/user-attachments/assets/bf8caab0-1a08-4f7c-89a8-c76f7d4a2579" />
+
 
 
 ## Key Insights
