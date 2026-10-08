@@ -4,9 +4,13 @@
 
 ## Tools Used
 
-**SQL (MySQL)** - Data Cleaning, Validation 
+**SQL (MySQL)** - Data extraction, Data cleaning, Reporting view creation 
 
-**Power BI** - Data Modeling, Visualization, Dashboard 
+**Power Query** - ETL, Data transformation
+
+**DAX** - Data modeling, Calculated measures, Explicit aggregations, KPI metrics
+
+**Power BI** - Data modeling, Interactive visual reporting, UI dashboard design 
 
 ## Project Overview & Objectives
 
@@ -14,13 +18,15 @@ Health Flow Co. is a fictional healthcare provider seeking to determine where op
 
 This analysis translates patient flow and clinical data from 7,000 admissions records into actionable insights to address the following core questions posed by managment:
 
-* **Which primary diagnoses and age cohorts drive the highest concentration of readmission risk?**
+* **Which clinical diagnoses and patient age groups account for the highest concentration of readmission risk?**
 
-* **How do discharge dispositions impact readmission rates?**
+* **How do patient discharge settings and length of stay (LOS) impact readmission outcomes?**
 
-* **How does stay duration correlate with readmission volume, and where are extended stays failing to mitigate post-discharge risk?**
+* **How does readmission risk vary by payer or insurance type, and where are coverage vulnerabilities most pronounced?**
 
-* **Where should discharge planning, early follow-up scheduling, and care-coordination resources be prioritized to achieve a sustained reduction in readmissions?**
+* **At what point post-discharge are readmissions occurring, and what does follow-up cadence tell us about care coordination timing?**
+
+* **Where should discharge planning, follow-up scheduling, and care-coordination resources be prioritized to achieve a sustained reduction in readmissions** 
 
 ## Data Overview
 
